@@ -1,0 +1,13 @@
+{
+    "name": "lag-bot",
+    "version": "1.0.0",
+    "description": "Bot dedicado ao canal dos Só os Lagados.",
+    "main": "bot.js",
+    "author": "Guilherme Pagliarini",
+    "dependencies": {
+        "curl": "^0.1.4",
+        "discord.io": "^2.5.3",
+        "winston": "^2.4.2",
+        "xmlhttprequest": "^1.8.0"
+    }
+}
