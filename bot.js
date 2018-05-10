@@ -2,6 +2,13 @@ var Discord = require('discord.io');
 var logger = require('winston');
 var auth = require('./data/discord-auth.json');
 
+var serverID = "325181137829756928";
+
+// Roles
+var roleAdmin = "325182644516290561";
+var roleModLagger = "325182958279327745";
+var roleLagadinhos = "407632962289532938";
+
 // Configure logger settings
 logger.remove(logger.transports.Console);
 logger.add(logger.transports.Console, {
@@ -17,11 +24,30 @@ var bot = new Discord.Client({
 
 bot.on('ready', function (evt) {
     logger.info('Connected');
-    logger.info('Logged in as: ');
-    logger.info(bot.username + ' - (' + bot.id + ')');
+    logger.info(bot.username + ' - (' + bot.id + ')');    
 });
 
-bot.on('message', function (user, userID, channelID, message, evt) {
+// bot.on('any', function(event) {    
+//     var eventName = event.t;
+// });
+
+bot.on('guildMemberAdd', function(member){    
+    params = {"serverID": serverID, "userID": member.id, "roleID": roleLagadinhos};        
+
+    bot.addToRole(params, function(err, response) {
+        if (err){
+            logger.error(err);
+        }else{
+            logger.info(response);
+        }
+    });
+});
+
+// bot.on('presenceUpdate', function(){
+    
+// });
+
+bot.on('message', function (user, userID, channelID, message, event) {
     if (message.substring(0, 1) == '!') {
         var args = message.substring(1).split(' ');
         var cmd = args[0];
@@ -35,7 +61,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 });
                 break; 
 
-            case 'evt':
+            case 'event':
                 bot.sendMessage({
                     to: channelID,
                     message: "Você executou o seguinte comando: "
@@ -48,5 +74,5 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     message: "Comando não reconhecido."
                 });                
         }
-     }
+    }
 });
