@@ -27,14 +27,8 @@ bot.on('ready', function (evt) {
     logger.info(bot.username + ' - (' + bot.id + ')');    
 });
 
-// bot.on('any', function(event) {    
-//     var eventName = event.t;
-// });
-
 bot.on('guildMemberAdd', function(member){    
-    params = {"serverID": serverID, "userID": member.id, "roleID": roleLagadinhos};        
-
-    bot.addToRole(params, function(err, response) {
+    bot.addToRole({serverID: serverID, userID: member.id, roleID: roleLagadinhos}, function(err, response) {
         if (err){
             logger.error(err);
         }else{
@@ -42,10 +36,6 @@ bot.on('guildMemberAdd', function(member){
         }
     });
 });
-
-// bot.on('presenceUpdate', function(){
-    
-// });
 
 bot.on('message', function (user, userID, channelID, message, event) {
     if (message.substring(0, 1) == '!') {
