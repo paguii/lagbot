@@ -1,6 +1,6 @@
 var Discord = require('discord.io');
 var logger = require('winston');
-var auth = require('./data/discord-auth.json');
+var auth = require('./data/auth/discord-auth.json');
 
 var serverID = "325181137829756928";
 
@@ -24,14 +24,22 @@ var bot = new Discord.Client({
 
 bot.on('ready', function (evt) {
     logger.info('Connected');
-    logger.info(bot.username + ' - (' + bot.id + ')');    
+
+    bot.editUserInfo({username: "LagBOT"}, function(error, response){
+        logger.info(error);
+        logger.info(response);
+    });
+
+    logger.info(bot.username + ' - (' + bot.id + ')');
+
 });
 
 bot.on('any', function (evt) {
-    logger.info(evt);    
+    logger.info(evt);
 });
 
-bot.on('guildMemberAdd', function(member){    
+// ADICIONA A ROLE LAGADINHOS QUANDO NOVO USUÁRIO
+bot.on('guildMemberAdd', function(member){
     bot.addToRole({serverID: serverID, userID: member.id, roleID: roleLagadinhos}, function(err, response) {
         if (err){
             logger.error(err);
@@ -45,28 +53,14 @@ bot.on('message', function (user, userID, channelID, message, event) {
     if (message.substring(0, 1) == '!') {
         var args = message.substring(1).split(' ');
         var cmd = args[0];
-       
+
         args = args.splice(1);
-        switch(cmd){            
-            case 'comando':
-                bot.sendMessage({
-                    to: channelID,
-                    message: "Você executou o seguinte comando: " + cmd
-                });
-                break; 
-
-            case 'event':
-                bot.sendMessage({
-                    to: channelID,
-                    message: "Você executou o seguinte comando: "
-                });
-                break; 
-
+        switch(cmd){
             default:
                 bot.sendMessage({
                     to: channelID,
                     message: "Comando não reconhecido."
-                });                
+                });
         }
     }
 });
