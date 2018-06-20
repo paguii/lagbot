@@ -27,6 +27,10 @@ bot.on('ready', function (evt) {
     logger.info(bot.username + ' - (' + bot.id + ')');    
 });
 
+bot.on('any', function (evt) {
+    logger.info(evt);    
+});
+
 bot.on('guildMemberAdd', function(member){    
     bot.addToRole({serverID: serverID, userID: member.id, roleID: roleLagadinhos}, function(err, response) {
         if (err){
