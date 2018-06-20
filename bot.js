@@ -24,12 +24,6 @@ var bot = new Discord.Client({
 
 bot.on('ready', function (evt) {
     logger.info('Connected');
-
-    bot.editUserInfo({username: "LagBOT"}, function(error, response){
-        logger.info(error);
-        logger.info(response);
-    });
-
     logger.info(bot.username + ' - (' + bot.id + ')');
 
 });
