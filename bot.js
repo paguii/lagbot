@@ -5,9 +5,9 @@ var logger = require('winston');
 var serverID = "325181137829756928";
 
 // Roles
-var roleAdmin = "325182644516290561";
-var roleModLagger = "325182958279327745";
-var roleLagadinhos = "407632962289532938";
+var roleAdmin = "458825119314477076";
+var roleModLagger = "458827437527269387";
+var roleLagadinhos = "458826173817028613";
 
 // Configure logger settings
 logger.remove(logger.transports.Console);
