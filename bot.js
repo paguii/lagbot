@@ -1,6 +1,6 @@
 var Discord = require('discord.io');
 var logger = require('winston');
-var auth = require('./data/auth/discord-auth.json');
+//var auth = require('./data/auth/discord-auth.json');
 
 var serverID = "325181137829756928";
 
@@ -18,7 +18,7 @@ logger.level = 'debug';
 
 // Initialize Discord Bot
 var bot = new Discord.Client({
-   token: auth.token,
+   token: process.env.DISCORD-AUTH,
    autorun: true
 });
 
